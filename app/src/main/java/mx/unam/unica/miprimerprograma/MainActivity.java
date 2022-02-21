@@ -1,5 +1,6 @@
 package mx.unam.unica.miprimerprograma;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -12,13 +13,18 @@ public class MainActivity extends AppCompatActivity {
 
     private   TextView txtvDisplay;    //Nombre del elemento a controlar
     private int contador;
-    private String display;
+    private String display="1";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         txtvDisplay = findViewById(R.id.txtvDisplay);
-        display="1";
+        if( savedInstanceState != null  )
+        {
+            display=savedInstanceState.getString("valorDisplay");
+            txtvDisplay.setText(display);
+        }
+
     }
 
     public void onClickContar(View v)
@@ -29,7 +35,20 @@ public class MainActivity extends AppCompatActivity {
 
     public  void onClickNumero(View v)
     {
-        display=display +"1";
+        switch (v.getId()  )
+        {
+            case R.id.btnUno:
+                display=display +"1";
+                break;
+            case R.id.btnDos:
+                display+="2";
+                break;
+            case R.id.btnClear:
+                display="0";
+                break;
+        }
+
+
         txtvDisplay.setText(display);
     }
 
@@ -43,6 +62,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intentProgramador = new Intent(MainActivity.this,ProgramadorActivity.class );
         intentProgramador.putExtra("valorDisplay",display);
         startActivity(intentProgramador);
+    }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("valorDirsplay",display);
     }
 }
