@@ -18,12 +18,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        txtvDisplay = findViewById(R.id.txtvDisplay);
-        if( savedInstanceState != null  )
+      //  txtvDisplay = findViewById(R.id.txtvDisplay);Error muy común confundir el nombre de los recursos
+        txtvDisplay= findViewById(R.id.txtvDisplay);
+       /* if( savedInstanceState != null  )
         {
             display=savedInstanceState.getString("valorDisplay");
             txtvDisplay.setText(display);
-        }
+        }*/
 
     }
 
@@ -60,13 +61,20 @@ public class MainActivity extends AppCompatActivity {
     public void onClickProgramador(View vista)
     {
         Intent intentProgramador = new Intent(MainActivity.this,ProgramadorActivity.class );
-        intentProgramador.putExtra("valorDisplay",display);
+        intentProgramador.putExtra("valorDisplayProg",display);
         startActivity(intentProgramador);
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("valorDirsplay",display);
+        outState.putString("valorDisplay",display);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        display=savedInstanceState.getString("valorDisplay");
+        txtvDisplay.setText(display);
     }
 }
