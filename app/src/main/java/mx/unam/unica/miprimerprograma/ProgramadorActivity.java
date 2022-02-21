@@ -13,11 +13,12 @@ public class ProgramadorActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_programador);
-        txtvDisplayprog= findViewById(R.id.txtvDisplay);
-        String Display =savedInstanceState.getString("valorDisplay");
+        txtvDisplayprog= findViewById(R.id.txtvDisplayprog);
 
-        txtvDisplayprog.setText(Display);
-
-
+        if (savedInstanceState != null)
+        {
+            String Display =savedInstanceState.getString("valorDisplay");
+            txtvDisplayprog.setText(Display);
+        }
     }
 }

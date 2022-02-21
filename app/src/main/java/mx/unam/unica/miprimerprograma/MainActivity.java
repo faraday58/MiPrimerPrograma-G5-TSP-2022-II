@@ -1,10 +1,12 @@
 package mx.unam.unica.miprimerprograma;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -29,7 +31,16 @@ public class MainActivity extends AppCompatActivity {
 
     public  void onClickNumero(View v)
     {
-        display=display +"1";
+        switch (v.getId()   )
+        {
+            case R.id.btnUno:
+                display=display +"1";
+                break;
+            case R.id.btnDos:
+                display+= getResources().getString(R.string.btnStringDos);
+                break;
+        }
+
         txtvDisplay.setText(display);
     }
 
@@ -42,7 +53,20 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intentProgramador = new Intent(MainActivity.this,ProgramadorActivity.class );
         intentProgramador.putExtra("valorDisplay",display);
+        Log.d("Salida","Display: " +display );
         startActivity(intentProgramador);
+    }
 
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("valorHV",display);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        display = savedInstanceState.getString("valorHV");
+        txtvDisplay.setText(display);
     }
 }
