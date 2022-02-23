@@ -1,5 +1,6 @@
 package mx.unam.unica.miprimerprograma;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -20,13 +21,17 @@ public class ProgramadorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_programador);
         txtvDisplayprog= findViewById(R.id.txtvDisplayprog);
-
+        //Capturando los valores del activity main a partir de Intent
+        Intent intentProgramador= getIntent();
+        Display= intentProgramador.getStringExtra("valorDisplayProg");
+        txtvDisplayprog.setText(Display);
 
         //Problema de object null
+        /*
         if(savedInstanceState != null) {
             Display = savedInstanceState.getString("valorDisplayProg");
             txtvDisplayprog.setText(Display);
-        }
+        }*/
     }
 
     public void onClickFunciones(View v)
