@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     private   TextView txtvDisplay;    //Nombre del elemento a controlar
     private int contador;
     private String display;
+    boolean punto = true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,20 @@ public class MainActivity extends AppCompatActivity {
             case R.id.btnDos:
                 display+= getResources().getString(R.string.btnStringDos);
                 break;
+            /*case R.id.punto:
+                if( !punto)
+                {
+                    display += ".";
+                }else
+
+                punto = false;
+              */
+            /*case R.id.btnDos:
+                if ( display.contains(".")   )
+                {
+
+                }
+            */
         }
 
         txtvDisplay.setText(display);
